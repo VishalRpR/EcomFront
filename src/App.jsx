@@ -1,22 +1,23 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Main from "./components/Main/Main";
-import Navbar from "./components/Navbar/Navbar";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
+
   return (
     <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="signup" element={ <Signup/>}/>
+        <Route />
+       
+      
 
+      </Routes>
 
-      <div className="max-w-4/6 justify-self-center">
-        <div className="sticky top-0  ">
-          <Navbar />
-
-        </div>
-        <div className="" >
-          <Main />
-
-        </div>
-      </div>
     </>
   );
 }
