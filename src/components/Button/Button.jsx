@@ -1,9 +1,14 @@
+import { buttonStyles } from "./buttonstyles";
 
-export default function Button({text}){
+export default function Button({buttonText,type}){
     return(
         <button
-         className="text-3xl underline px-4 py-2 bg-blue-500 "
-         >{text}</button>
+         className={`${buttonStyles(type)} px-5 py-2 rounded `}
+         > 
+         
+         {buttonText}
+         
+         </button>
     )
 }
 

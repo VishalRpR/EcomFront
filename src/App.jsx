@@ -1,16 +1,24 @@
-import './App.css'
-import Button from './components/Button/Button'
+import "./App.css";
+import Main from "./components/Main/Main";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
     <>
-     <h1>
-      Hello world
-     </h1>
-     <Button text="Click Me"/>
 
+
+      <div className="max-w-4/6 justify-self-center">
+        <div className="sticky top-0  ">
+          <Navbar />
+
+        </div>
+        <div className="" >
+          <Main />
+
+        </div>
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
