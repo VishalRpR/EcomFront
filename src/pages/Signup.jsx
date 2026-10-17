@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-function Signup(){
-    return(
-        <>
-      <h1>
-        Signup
-        
-        </h1>       
-        </>
-    )
-}
-
-=======
 import { SignupForm } from "@/components/signup-form"
 import { GalleryVerticalEnd } from "lucide-react"
 
@@ -34,5 +21,4 @@ function Signup(){
     )
 }
 
->>>>>>> 5c080fd (added some car functionality with bug fix in products rendering)
 export default Signup

@@ -1,23 +1,3 @@
-<<<<<<< HEAD
-import { Link } from "react-router-dom";
-
-export default function ProductCard({description ,title,image,productCardHandler}){
-
-    return(
-        <>
-      
-        <div className="justify-items-center bg-green-300" onClick={productCardHandler}>
-            <img className="h-40 w-50" src={image}></img>
-            <div>
-                {description}
-            </div>
-            <h1>{title} </h1>
-        </div>
-        </>
-    )
-}
-=======
-import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -60,8 +40,3 @@ export default function ProductCard({description ,title,image,productCardHandler
         </>
     )
 }
-
-
-
-
->>>>>>> 5c080fd (added some car functionality with bug fix in products rendering)

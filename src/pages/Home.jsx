@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-import Main from "../components/Main/Main";
-import Navbar from "../components/Navbar/Navbar";
-
-function Home(){
-return(
-    <>
-      <div className="max-w-4/6 justify-self-center">
-        <div className="sticky top-0  ">
-          <Navbar />
-
-        </div>
-        <div className="" >
-          <Main />
-
-        </div>
-      </div>
-    </>
-)
-}
-
-=======
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { SectionCards } from "@/components/section-cards";
@@ -62,5 +40,4 @@ return(
 )
 }
 
->>>>>>> 5c080fd (added some car functionality with bug fix in products rendering)
 export default Home;
