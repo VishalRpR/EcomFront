@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Link, useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import axios from "axios"
 
 export function SignupForm({
@@ -45,7 +45,6 @@ export function SignupForm({
       })
     console.log("here after the request")
       console.log(response.data.tkn)
-      localStorage.setItem('token', response.data.tkn)
       if(response.data.success==true){
         navigate("/login")
       }

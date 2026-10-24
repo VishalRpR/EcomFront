@@ -15,32 +15,49 @@ import {
   FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react"
+import axios from "axios"
 
 export function LoginForm({
   className,
   ...props
 }) {
 
-  async function loginSubmitHandler() {
-    const tkn = localStorage.getItem('token')
 
-    console.log(tkn)
+  const navigate = useNavigate()
+  const [email, setEmail] = useState("");
 
-    if (tkn != null) {
-      const response = await axios.get("http://localhost:3001/", {
-        headers: {
+  const [password, setPassword] = useState("");
+  function onChangeEmailHandler(e) {
+    setEmail(e.target.value)
+  }
 
-          'Authorisation': `Bearer ${tkn}`
-        }
+  function onChangePasswordHandler(e) {
+    setPassword(e.target.value)
+  }
 
+  async function loginSubmitHandler(e) {
 
+    e.preventDefault()
+    // const tkn = localStorage.getItem('token')
+    // console.log(tkn)
 
-      })
-
-
-      console.log(response.data)
+    const response = await axios.post("http://localhost:3001/api/v1/user/authenticate", {
+      email: email,
+      password: password
     }
+
+    )
+    console.log(response)
+
+    if (response.data.data != null) {
+      localStorage.setItem("token", response.data.data.token)
+     
+        navigate("/")
+      
+    }
+
   }
 
 
@@ -59,7 +76,7 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={loginSubmitHandler}>
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -67,6 +84,7 @@ export function LoginForm({
                   id="email"
                   type="email"
                   placeholder="m@example.com"
+                  onChange={onChangeEmailHandler}
                   required
                 />
               </Field>
@@ -80,10 +98,10 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input id="password" type="password" required onChange={onChangePasswordHandler} />
               </Field>
               <Field>
-                <Button type="submit">Login</Button>
+                <Button type="submit" >Login</Button>
                 <Button variant="outline" type="button">
                   Login with Google
                 </Button>
