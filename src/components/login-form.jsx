@@ -27,8 +27,8 @@ export function LoginForm({
 
   const navigate = useNavigate()
   const [email, setEmail] = useState("");
-
   const [password, setPassword] = useState("");
+  
   function onChangeEmailHandler(e) {
     setEmail(e.target.value)
   }
@@ -45,17 +45,16 @@ export function LoginForm({
 
     const response = await axios.post("http://localhost:3001/api/v1/user/authenticate", {
       email: email,
-      password: password
-    }
+      password:password
+    },
+   
 
     )
-    console.log(response)
+    console.log(response.data.success)
 
-    if (response.data.data != null) {
-      localStorage.setItem("token", response.data.data.token)
-     
-        navigate("/")
-      
+    if (response.data.success == true) {
+      navigate("/")
+
     }
 
   }

@@ -14,6 +14,9 @@ function ProductPage(){
                 productId: state.key,
                 cartId:1,
                 quantity: 1,
+            },
+            {
+                withCredentials:true
             }
             )
 

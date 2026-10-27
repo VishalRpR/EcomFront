@@ -1,12 +1,17 @@
-import Button from "../Button/Button";
+
 import Search from "../Search/Search";
+import { Button } from "../ui/button";
 
 function SearchBar(){
     return(
         <>
-      
-        <Search placeholder="Search for Products, Brands and More"  type="text" />
-        <Button buttonText={"Search"} />
+      <div className="flex items-center">
+      <Search placeholder="Search for Products, Brands and More"  type="text" />
+      <Button>
+        Search
+      </Button>
+      </div>
+        
        
         </>
     )

@@ -5,8 +5,10 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ProductPage from "./pages/ProductPage";
 import Cart from "./pages/Cart";
-
+import axios from 'axios';
 function App() {
+// Set globally for all requests
+axios.defaults.withCredentials = true;
   return (
     <>
       <Routes>
