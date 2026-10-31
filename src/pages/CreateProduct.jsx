@@ -30,6 +30,8 @@ import {
   InputGroupTextarea,
 } from "@/components/ui/input-group"
 import FileUpload from "@/components/shadcn-space/file-upload/file-upload-05"
+import { Pattern } from "@/components/examples/c-number-field-1"
+import axios from "axios"
 
 function CreateProuduct(){
 
@@ -45,6 +47,9 @@ function CreateProuduct(){
           .string()
           .min(20, "Description must be at least 20 characters.")
           .max(100, "Description must be at most 100 characters."),
+
+          quantity:z.string(),
+          price:z.string()
       })
       
     
@@ -53,24 +58,37 @@ function CreateProuduct(){
           defaultValues: {
             title: "",
             description: "",
+            quantity:"",
+            price:""
           },
         })
       
-        function onSubmit(data) {
-          toast("You submitted the following values:", {
-            description: (
-              <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-                <code>{JSON.stringify(data, null, 2)}</code>
-              </pre>
-            ),
-            position: "bottom-right",
-            classNames: {
-              content: "flex flex-col gap-2",
-            },
-            style: {
-              "--border-radius": "calc(var(--radius)  + 4px)",
-            }
-          })
+        async function onSubmit(data) {
+
+          console.log("this onsubmit is working")
+          console.log(data)
+
+          console.log("here")
+          const user = await axios.get("http://localhost:3001/api/v1/user/email")
+           console.log(user.data.data.id)
+
+           const response = await axios.post("http://localhost:3001/api/v1/product",{
+            name:data.title,
+            description:data.description,
+            image:'https://randomimageurl.com/assets/images/local/20260103_0531_Humorous%20Scene_simple_compose_01ke20wfqvfqasngxqh5dh36gh%20%281%29_compressed_q80.jpeg',
+            price:Number(data.price),
+            stockQuantity:Number(data.quantity),
+            categoryId:1,
+            sellerId:user.data.data.id
+           })
+
+           console.log(response)
+
+
+
+
+
+           console.log("heree")
         }
 return(
     <>
@@ -137,7 +155,7 @@ return(
 
 
 <Controller
-              name="title"
+              name="image"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
@@ -151,6 +169,72 @@ return(
                 </Field>
               )}
             />
+
+
+<Controller
+              name="price"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor="form-rhf-demo-title">
+                    Price
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id="form-rhf-demo-title"
+                    aria-invalid={fieldState.invalid}
+
+                    autoComplete="off"
+                    type="number"
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+
+
+<Controller
+              name="quantity"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor="form-rhf-demo-title">
+                    quantity
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id="form-rhf-demo-title"
+                    aria-invalid={fieldState.invalid}
+
+                    autoComplete="off"
+                    type="number"
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+
+
+
+{/* <Controller
+              name="quantity"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor="form-rhf-demo-title">
+                    quantity
+                  </FieldLabel>
+                 <Pattern />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            /> */}
 
 
           </FieldGroup>
