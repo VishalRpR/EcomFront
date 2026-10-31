@@ -2,20 +2,26 @@ import { useNavigate } from "react-router-dom"
 import ProductCard from "./ProductCard"
 
 
-export default function ProdctCardContainer({ productid,description, title, image }) {
+export default function ProdctCardContainer({ productid,description, title, image,price }) {
     const navigate = useNavigate()
 
     function productCardHandler() {
         console.log("Product clicked inside product container",productid)
-        navigate(`product/`,{
-            state:{key:productid,description:description,title:title}
+        navigate(`/product`,{
+            state:{key:productid,description:description,title:title ,price:price}
         })
 
     }
     return (
         
            
-            <ProductCard  productCardHandler={productCardHandler} title={title} description={description} image={image} />
+            <ProductCard  
+            productCardHandler={productCardHandler} 
+            title={title} 
+            description={description} 
+            image={image}
+            price={price}
+            />
 
 
         

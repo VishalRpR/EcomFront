@@ -9,29 +9,41 @@ function ProductPage(){
     const navigate = useNavigate();
 
     async function addCardClickHandler(){
-    
-            const response = await axios.post("http://localhost:3001/api/v1/cart/item", {
-                productId: state.key,
-                cartId:1,
-                quantity: 1,
-            },
-            {
-                withCredentials:true
-            }
-            )
+    try {
 
-            console.log(response.data)
+        const response = await axios.post("http://localhost:3001/api/v1/cart/item", {
+            productId: state.key,
+            cartId:1,
+            quantity: 1,
+        },
+        {
+            withCredentials:true
+        }
+        )
+
+        console.log(response.data)
 
 
-            if (response.data.success==true){
-                navigate("/cart")
-            }
-  
+        if (response.data.success==true){
+            navigate("/cart")
+        }
 
+
+        
+    } catch (error) {
+        if(error.response.status==401){
+            navigate("/login")
+          }
+    }
+           
     }
 
 
     function buyClickHandler(){
+
+        navigate("/checkout",{
+            state:state
+        })
 
     }
     
@@ -49,6 +61,9 @@ function ProductPage(){
             </h1>
             <p>
             {state.description}
+            </p>
+            <p>
+                {state.price}
             </p>
             
             

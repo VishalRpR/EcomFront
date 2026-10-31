@@ -1,19 +1,42 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
+    const navigate = useNavigate();
     const [cartitems, setCartitems] = useState([])
 
     useEffect(() => {
 
         async function listCartHandler() {
-            const items = await axios.get("http://localhost:3001/api/v1/cart")
+            try {
 
-            console.log(items)
 
-            setCartitems(items.data.data)
-            console.log(items.data.data)
+                const items = await axios.get("http://localhost:3001/api/v1/cart")
+                const products = await axios.get("http://localhost:3001/api/v1/product")
+
+
+
+                const idsToKeep = new Set(items.data.data.map(item => item.productId));
+
+                const filtered = products.data.data.filter(item => idsToKeep.has(item.id));
+
+                console.log(filtered)
+
+
+                setCartitems(filtered)
+
+
+
+            } catch (error) {
+                 if(error.response.status==401){
+                   navigate("/login")
+                 }
+            }
+
+
+
+
         }
 
 
@@ -24,12 +47,20 @@ function Cart() {
     return (
 
         <>
-            {cartitems.map((elem) => (
-                    <h1>{elem.name}</h1>
-                   
+            {cartitems.map((elem) => {
+                return <>
+                    <p>product</p>
+                    <h1 key={elem.id}>{elem.name}</h1>
+                    <p>
+                        {elem.desciption}
+                    </p>
+                </>
+            }
 
 
-            ))}
+
+
+            )}
         </>
 
     )

@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-export default function ProductCard({description ,title,image,productCardHandler}){
+export default function ProductCard({description ,title,image,productCardHandler,price}){
 
     return(
         <>
@@ -29,6 +29,9 @@ export default function ProductCard({description ,title,image,productCardHandler
         <CardDescription>
         {description}
         </CardDescription>
+        <p>
+          {price}
+        </p>
       </CardHeader>
       <CardFooter>
         <Button className="w-full">View product</Button>

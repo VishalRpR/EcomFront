@@ -50,7 +50,6 @@ export function LoginForm({
    
 
     )
-    console.log(response.data.success)
 
     if (response.data.success == true) {
       navigate("/")

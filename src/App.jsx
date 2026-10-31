@@ -6,6 +6,8 @@ import Signup from "./pages/Signup";
 import ProductPage from "./pages/ProductPage";
 import Cart from "./pages/Cart";
 import axios from 'axios';
+import Checkout from "./pages/Checkout";
+import CreateProuduct from "./pages/CreateProduct";
 function App() {
 // Set globally for all requests
 axios.defaults.withCredentials = true;
@@ -17,6 +19,8 @@ axios.defaults.withCredentials = true;
         <Route path="/signup" element={<Signup />} />
         <Route path="/product/" element={<ProductPage />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/products" element={<CreateProuduct />} />
       </Routes>
     </>
   );
